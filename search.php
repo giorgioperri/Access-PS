@@ -1,6 +1,6 @@
 <?php
 /**
- * Main template file.
+ * Search results template.
  *
  * @package AccessPSTheme
  */
@@ -9,8 +9,20 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-	<?php
-	if ( have_posts() ) :
+	<?php if ( have_posts() ) : ?>
+		<header class="page-header">
+			<h1 class="page-title">
+				<?php
+				printf(
+					/* translators: %s: Search query. */
+					esc_html__( 'Search results for: %s', 'accesspstheme' ),
+					'<span>' . esc_html( get_search_query() ) . '</span>'
+				);
+				?>
+			</h1>
+		</header>
+
+		<?php
 		while ( have_posts() ) :
 			the_post();
 
