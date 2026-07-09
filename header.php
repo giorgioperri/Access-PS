@@ -19,22 +19,17 @@
 
 	<header id="masthead" class="site-header">
 		<div class="site-header__inner">
-			<div class="site-branding">
-				<?php if ( is_front_page() && is_home() ) : ?>
-					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php else : ?>
-					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php endif; ?>
+			<?php echo wp_kses_post( accesspstheme_brand_logo() ); ?>
 
-				<?php
-				$accesspstheme_description = get_bloginfo( 'description', 'display' );
-				if ( $accesspstheme_description || is_customize_preview() ) :
-					?>
-					<p class="site-description"><?php echo esc_html( $accesspstheme_description ); ?></p>
-				<?php endif; ?>
-			</div>
+			<button class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false">
+				<span class="menu-toggle__bar"></span>
+				<span class="menu-toggle__bar"></span>
+				<span class="menu-toggle__bar"></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'accesspstheme' ); ?></span>
+			</button>
 
-			<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'accesspstheme' ); ?>">
+			<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'accesspstheme' ); ?>" hidden>
+				<button class="menu-close" type="button" aria-label="<?php esc_attr_e( 'Close menu', 'accesspstheme' ); ?>"></button>
 				<?php
 				wp_nav_menu(
 					array(
