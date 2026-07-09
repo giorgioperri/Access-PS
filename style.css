@@ -22,9 +22,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready
 	--accessps-muted: #5e5e5e;
 	--accessps-line: #cfcfcf;
 	--accessps-page: #ffffff;
-	--accessps-language-bg: #f4f1ff;
-	--accessps-width: 72rem;
-	--accessps-narrow: 43rem;
+	--accessps-panel: #f5f1ff;
+	--accessps-width: 68rem;
+	--accessps-narrow: 40rem;
 	--accessps-pad: clamp(1.25rem, 4vw, 2.5rem);
 }
 
@@ -91,58 +91,15 @@ strong {
 }
 
 .accessps-brand {
-	display: inline-grid;
-	grid-template-columns: auto 1fr;
-	grid-template-areas:
-		"mission mission"
-		"row row"
-		". university";
+	display: inline-flex;
 	align-items: center;
-	column-gap: 0.55rem;
-	color: var(--accessps-red);
 	text-decoration: none;
 }
 
-.accessps-brand__mission {
-	grid-area: mission;
-	margin-left: 2.8rem;
-	font-size: clamp(0.5rem, 1.4vw, 0.66rem);
-	font-weight: 800;
-	line-height: 1.2;
-}
-
-.accessps-brand__row {
-	grid-area: row;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.6rem;
-}
-
-.accessps-brand__seal {
-	width: clamp(2rem, 6vw, 3.25rem);
-	aspect-ratio: 1;
-	display: inline-grid;
-	place-items: center;
-	border: 2px solid currentColor;
-	border-radius: 999px;
-	font-family: Georgia, "Times New Roman", serif;
-	font-size: clamp(1rem, 3vw, 1.7rem);
-	font-weight: 700;
-}
-
-.accessps-brand__name {
-	font-family: Georgia, "Times New Roman", serif;
-	font-size: clamp(1.5rem, 5vw, 2.65rem);
-	line-height: 0.9;
-	text-transform: uppercase;
-}
-
-.accessps-brand__university {
-	grid-area: university;
-	margin-top: -0.12rem;
-	font-size: clamp(0.57rem, 1.7vw, 0.86rem);
-	letter-spacing: 0.03em;
-	text-transform: uppercase;
+.accessps-brand img {
+	width: clamp(12rem, 48vw, 19rem);
+	max-height: 5rem;
+	object-fit: contain;
 }
 
 .menu-toggle {
@@ -170,11 +127,25 @@ strong {
 	position: fixed;
 	inset: 0;
 	z-index: 40;
-	padding-top: 8.75rem;
+	display: grid;
+	align-content: start;
+	padding-top: 6rem;
 	background: rgba(0, 0, 0, 0.44);
 }
 
+.main-navigation::before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 6rem;
+	content: "";
+	background: #ffffff;
+}
+
 .main-navigation .menu {
+	position: relative;
+	z-index: 1;
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -202,8 +173,9 @@ strong {
 
 .menu-close {
 	position: absolute;
-	top: 6.25rem;
-	right: 1.25rem;
+	z-index: 2;
+	top: 1.65rem;
+	right: 1rem;
 	width: 2.75rem;
 	height: 2.75rem;
 	border: 0;
@@ -356,7 +328,7 @@ strong {
 	z-index: 5;
 	width: min(100%, 29rem);
 	margin: 2.5rem auto 1.1rem;
-	text-align: left;
+	text-align: center;
 }
 
 .accessps-language__trigger {
@@ -372,7 +344,7 @@ strong {
 	background: #ffffff;
 	color: var(--accessps-text);
 	font: inherit;
-	font-weight: 700;
+	font-weight: 800;
 	cursor: pointer;
 }
 
@@ -387,11 +359,11 @@ strong {
 }
 
 .accessps-language__panel {
-	margin-top: 0.5rem;
+	margin-top: 0.55rem;
 	padding: 1rem;
 	border-radius: 0.7rem;
-	background: var(--accessps-language-bg);
-	box-shadow: 0 0.6rem 1.5rem rgba(55, 36, 87, 0.12);
+	background: var(--accessps-panel);
+	box-shadow: 0 0.75rem 1.6rem rgba(55, 36, 87, 0.12);
 }
 
 .accessps-language__search {
@@ -401,12 +373,16 @@ strong {
 	padding: 0.65rem 0.9rem;
 	border: 1px solid #d7d3e6;
 	border-radius: 999px;
+	background: #ffffff;
 	font: inherit;
 }
 
 .accessps-language__list {
+	max-height: 19rem;
 	display: grid;
 	gap: 0.5rem;
+	overflow-y: auto;
+	padding-right: 0.15rem;
 }
 
 .accessps-language__option {
@@ -419,7 +395,7 @@ strong {
 	border: 0;
 	border-radius: 999px;
 	background: #ffffff;
-	color: #666666;
+	color: #606060;
 	font: inherit;
 	font-weight: 800;
 	text-align: center;
@@ -431,8 +407,11 @@ strong {
 }
 
 .accessps-language__flag {
-	font-size: 1.25rem;
-	text-align: left;
+	width: 1.45rem;
+	height: 1.45rem;
+	border-radius: 999px;
+	object-fit: cover;
+	background: #eeeeee;
 }
 
 .accessps-language__radio {
@@ -458,6 +437,17 @@ strong {
 	font: inherit;
 	font-weight: 800;
 	cursor: pointer;
+}
+
+.accessps-language__choose:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.accessps-language__notice {
+	margin: 0;
+	color: var(--accessps-muted);
+	font-size: 0.95rem;
 }
 
 .accessps-button,
@@ -489,25 +479,13 @@ strong {
 	display: grid;
 	place-items: center;
 	margin: 3.2rem auto 1.8rem;
-	border: 0.15rem solid rgba(0, 0, 0, 0.08);
 	background: #ffffff;
 }
 
-.accessps-stamp__circle {
-	width: 82%;
-	aspect-ratio: 1;
-	display: grid;
-	place-items: center;
-	padding: 1rem;
-	border: 0.22rem solid #1d1d1d;
-	border-radius: 999px;
-	color: #1d1d1d;
-	font-family: Georgia, "Times New Roman", serif;
-	font-size: clamp(1.2rem, 5vw, 2rem);
-	font-weight: 900;
-	line-height: 1.05;
-	text-align: center;
-	text-transform: uppercase;
+.accessps-stamp img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 .accessps-rule {
@@ -867,14 +845,12 @@ strong {
 }
 
 .accessps-brand--footer {
-	grid-template-columns: auto auto;
-	transform: scale(1.08);
-	transform-origin: center;
+	justify-content: center;
 }
 
-.accessps-brand--footer .accessps-brand__mission {
-	margin-left: 0;
-	text-align: center;
+.accessps-brand--footer img {
+	width: min(24rem, 82vw);
+	max-height: 7rem;
 }
 
 .site-footer-band {
@@ -909,7 +885,7 @@ strong {
 
 @media (min-width: 801px) {
 	.site-header__inner {
-		min-height: 8.4rem;
+		min-height: 6.6rem;
 	}
 
 	.menu-toggle,
@@ -917,11 +893,20 @@ strong {
 		display: none;
 	}
 
+	.accessps-brand img {
+		width: 18rem;
+		max-height: 4.4rem;
+	}
+
 	.main-navigation {
 		position: static;
 		display: block;
 		padding: 0;
 		background: transparent;
+	}
+
+	.main-navigation::before {
+		display: none;
 	}
 
 	.main-navigation .menu {
@@ -941,15 +926,97 @@ strong {
 		font-size: 0.95rem;
 	}
 
+	.accessps-hero-image {
+		min-height: clamp(18rem, 32vw, 25rem);
+	}
+
 	.accessps-home__intro {
-		padding-top: 5.6rem;
+		padding-top: 3.5rem;
+	}
+
+	.accessps-title {
+		font-size: clamp(3.2rem, 5.3vw, 4.35rem);
+	}
+
+	.accessps-home__title {
+		margin-bottom: 1.45rem;
+	}
+
+	.accessps-lead {
+		max-width: 32rem;
+		font-size: clamp(1.12rem, 1.7vw, 1.38rem);
+		line-height: 1.38;
+	}
+
+	.accessps-home__copy {
+		gap: 1.25rem;
+	}
+
+	.accessps-stamp {
+		width: 15rem;
+		margin-top: 2.6rem;
+	}
+
+	.accessps-choice {
+		padding-top: 3rem;
+	}
+
+	.accessps-choice__subtitle {
+		margin-bottom: 2.3rem;
+		font-size: clamp(1.25rem, 2vw, 1.55rem);
+	}
+
+	.accessps-choice__stage {
+		min-height: 44rem;
 	}
 
 	.accessps-choice__cards {
-		margin-top: 9rem;
+		width: min(100%, 42rem);
+		gap: 1rem;
+		margin-top: 7rem;
+	}
+
+	.accessps-choice-card {
+		min-height: 7.6rem;
+		grid-template-columns: 5.4rem minmax(0, 1fr) 3.2rem;
+		padding: 1rem 1.25rem;
+	}
+
+	.accessps-choice-card__icon {
+		width: 4.6rem;
+	}
+
+	.accessps-choice-card h2 {
+		font-size: 2rem;
+	}
+
+	.accessps-choice-card p {
+		font-size: 1.25rem;
 	}
 
 	.accessps-content {
-		padding-top: 3rem;
+		padding-top: 2.5rem;
+	}
+
+	.accessps-content .accessps-title {
+		font-size: clamp(3rem, 4.5vw, 3.85rem);
+	}
+
+	.accessps-section {
+		padding-block: 1.55rem;
+	}
+
+	.accessps-section h2,
+	.accessps-section h3 {
+		font-size: clamp(1.28rem, 2vw, 1.55rem);
+	}
+
+	.accessps-history-hero {
+		min-height: clamp(17rem, 32vw, 24rem);
+	}
+
+	.accessps-history-hero h1 {
+		width: min(100%, 32rem);
+		font-size: clamp(2.7rem, 4.8vw, 4rem);
 	}
 }

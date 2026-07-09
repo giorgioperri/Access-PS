@@ -67,49 +67,22 @@ function accesspstheme_enqueue_assets() {
 			filemtime( $script_path ),
 			true
 		);
-
-		wp_localize_script(
-			'accesspstheme-site',
-			'accesspsTheme',
-			array(
-				'wpmlLanguages' => accesspstheme_get_wpml_languages(),
-			)
-		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'accesspstheme_enqueue_assets' );
 
 /**
- * Gets WPML languages when WPML is active.
+ * Returns an asset URL from the theme images directory.
  *
- * @return array
+ * @param string $filename Asset filename.
+ * @return string
  */
-function accesspstheme_get_wpml_languages() {
-	if ( ! function_exists( 'icl_get_languages' ) ) {
-		return array();
-	}
-
-	$wpml_languages = icl_get_languages( 'skip_missing=0&orderby=code' );
-
-	if ( empty( $wpml_languages ) || ! is_array( $wpml_languages ) ) {
-		return array();
-	}
-
-	$languages = array();
-
-	foreach ( $wpml_languages as $language ) {
-		if ( empty( $language['language_code'] ) || empty( $language['url'] ) ) {
-			continue;
-		}
-
-		$languages[ $language['language_code'] ] = esc_url_raw( $language['url'] );
-	}
-
-	return $languages;
+function accesspstheme_image_url( $filename ) {
+	return get_stylesheet_directory_uri() . '/assets/images/' . ltrim( $filename, '/' );
 }
 
 /**
- * Returns the AccessPS/Sapienza text logo.
+ * Returns the replaceable Sapienza logo image.
  *
  * @param string $class_name Optional class name.
  * @return string
@@ -118,12 +91,7 @@ function accesspstheme_brand_logo( $class_name = '' ) {
 	$class_name = trim( 'accessps-brand ' . $class_name );
 
 	return '<a class="' . esc_attr( $class_name ) . '" href="' . esc_url( home_url( '/' ) ) . '" rel="home">
-		<span class="accessps-brand__mission">' . esc_html__( 'Progetto di Terza missione di', 'accesspstheme' ) . '</span>
-		<span class="accessps-brand__row">
-			<span class="accessps-brand__seal" aria-hidden="true">S</span>
-			<span class="accessps-brand__name">Sapienza</span>
-		</span>
-		<span class="accessps-brand__university">' . esc_html__( 'Università di Roma', 'accesspstheme' ) . '</span>
+		<img src="' . esc_url( accesspstheme_image_url( 'sapienza-logo.svg' ) ) . '" alt="' . esc_attr__( 'Sapienza Università di Roma', 'accesspstheme' ) . '">
 	</a>';
 }
 
@@ -178,62 +146,90 @@ function accesspstheme_icon_shortcode( $atts ) {
 add_shortcode( 'accessps_icon', 'accesspstheme_icon_shortcode' );
 
 /**
- * Searchable language selector shortcode.
+ * WPML language selector shortcode.
  *
  * @return string
  */
 function accesspstheme_language_selector_shortcode() {
-	$languages = array(
-		array(
-			'code'  => 'it',
-			'label' => 'Italiano',
-			'flag'  => '🇮🇹',
-		),
-		array(
-			'code'  => 'en',
-			'label' => 'English',
-			'flag'  => '🇬🇧',
-		),
-		array(
-			'code'  => 'fr',
-			'label' => 'Français',
-			'flag'  => '🇫🇷',
-		),
-		array(
-			'code'  => 'de',
-			'label' => 'Deutsch',
-			'flag'  => '🇩🇪',
-		),
-		array(
-			'code'  => 'es',
-			'label' => 'Español',
-			'flag'  => '🇪🇸',
-		),
-	);
+	$languages = accesspstheme_get_wpml_languages();
 
 	ob_start();
-	?>
-	<div class="accessps-language" data-language-selector>
-		<button class="accessps-language__trigger" type="button" aria-expanded="false" aria-controls="accessps-language-panel">
-			<span data-language-current><?php esc_html_e( 'Seleziona la tua lingua', 'accesspstheme' ); ?></span>
-			<span class="accessps-language__globe" aria-hidden="true">◎</span>
-		</button>
-		<div class="accessps-language__panel" id="accessps-language-panel" hidden>
-			<label class="screen-reader-text" for="accessps-language-search"><?php esc_html_e( 'Cerca lingua', 'accesspstheme' ); ?></label>
-			<input class="accessps-language__search" id="accessps-language-search" type="search" placeholder="<?php esc_attr_e( 'Cerca lingua', 'accesspstheme' ); ?>" data-language-search>
-			<div class="accessps-language__list">
-				<?php foreach ( $languages as $language ) : ?>
-					<button class="accessps-language__option" type="button" data-language-option data-code="<?php echo esc_attr( $language['code'] ); ?>" data-label="<?php echo esc_attr( $language['label'] ); ?>">
-						<span class="accessps-language__flag" aria-hidden="true"><?php echo esc_html( $language['flag'] ); ?></span>
-						<span><?php echo esc_html( $language['label'] ); ?></span>
-						<span class="accessps-language__radio" aria-hidden="true"></span>
-					</button>
-				<?php endforeach; ?>
+
+	if ( ! empty( $languages ) ) {
+		?>
+		<div class="accessps-language" data-language-selector>
+			<button class="accessps-language__trigger" type="button" aria-expanded="false" aria-controls="accessps-language-panel">
+				<span data-language-current><?php esc_html_e( 'Seleziona la tua lingua', 'accesspstheme' ); ?></span>
+				<span class="accessps-language__globe" aria-hidden="true">◎</span>
+			</button>
+			<div class="accessps-language__panel" id="accessps-language-panel" hidden>
+				<label class="screen-reader-text" for="accessps-language-search"><?php esc_html_e( 'Cerca lingua', 'accesspstheme' ); ?></label>
+				<input class="accessps-language__search" id="accessps-language-search" type="search" placeholder="<?php esc_attr_e( 'Cerca lingua', 'accesspstheme' ); ?>" data-language-search>
+				<div class="accessps-language__list">
+					<?php foreach ( $languages as $language ) : ?>
+						<button class="accessps-language__option" type="button" data-language-option data-url="<?php echo esc_url( $language['url'] ); ?>" data-label="<?php echo esc_attr( $language['label'] ); ?>">
+							<?php if ( ! empty( $language['flag_url'] ) ) : ?>
+								<img class="accessps-language__flag" src="<?php echo esc_url( $language['flag_url'] ); ?>" alt="">
+							<?php else : ?>
+								<span class="accessps-language__flag" aria-hidden="true"></span>
+							<?php endif; ?>
+							<span><?php echo esc_html( $language['label'] ); ?></span>
+							<span class="accessps-language__radio" aria-hidden="true"></span>
+						</button>
+					<?php endforeach; ?>
+				</div>
+				<button class="accessps-language__choose" type="button" disabled data-language-choose><?php esc_html_e( 'Scegli', 'accesspstheme' ); ?></button>
 			</div>
-			<button class="accessps-language__choose" type="button" data-language-close><?php esc_html_e( 'Scegli', 'accesspstheme' ); ?></button>
 		</div>
-	</div>
-	<?php
+		<?php
+	} elseif ( current_user_can( 'manage_options' ) ) {
+		echo '<p class="accessps-language__notice">' . esc_html__( 'Configura WPML per mostrare il selettore lingua.', 'accesspstheme' ) . '</p>';
+	}
+
 	return ob_get_clean();
 }
 add_shortcode( 'accessps_language_selector', 'accesspstheme_language_selector_shortcode' );
+
+/**
+ * Gets active WPML languages for the custom selector.
+ *
+ * @return array<int, array<string, string>>
+ */
+function accesspstheme_get_wpml_languages() {
+	$wpml_languages = apply_filters(
+		'wpml_active_languages',
+		null,
+		array(
+			'skip_missing' => 0,
+			'orderby'      => 'native_name',
+		)
+	);
+
+	if ( empty( $wpml_languages ) || ! is_array( $wpml_languages ) ) {
+		return array();
+	}
+
+	$languages = array();
+
+	foreach ( $wpml_languages as $language ) {
+		if ( empty( $language['url'] ) ) {
+			continue;
+		}
+
+		$native_name     = ! empty( $language['native_name'] ) ? $language['native_name'] : '';
+		$translated_name = ! empty( $language['translated_name'] ) ? $language['translated_name'] : '';
+		$label           = $native_name ? $native_name : $translated_name;
+
+		if ( $native_name && $translated_name && $native_name !== $translated_name ) {
+			$label = sprintf( '%1$s (%2$s)', $native_name, $translated_name );
+		}
+
+		$languages[] = array(
+			'label'    => $label,
+			'url'      => $language['url'],
+			'flag_url' => ! empty( $language['country_flag_url'] ) ? $language['country_flag_url'] : '',
+		);
+	}
+
+	return $languages;
+}

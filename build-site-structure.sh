@@ -17,7 +17,7 @@ WP="${WP:-wp}"
 WP_PATH="${WP_PATH:-$WP_ROOT_DEFAULT}"
 
 wp_cli() {
-	"$WP" --path="$WP_PATH" "$@"
+	"$WP" --path="$WP_PATH" --skip-plugins "$@"
 }
 
 require_wp() {
@@ -69,7 +69,8 @@ upsert_page() {
 			--post_content="$content" \
 			--post_status=publish \
 			--menu_order="$menu_order" \
-			--porcelain
+			>/dev/null
+		page_id_by_slug "$slug"
 	fi
 }
 
@@ -90,7 +91,8 @@ ensure_menu() {
 	menu_id="$(menu_id_by_slug "$slug")"
 
 	if [[ -z "$menu_id" ]]; then
-		wp_cli menu create "$name" --porcelain
+		wp_cli menu create "$name" >/dev/null
+		menu_id_by_slug "$slug"
 	else
 		echo "$menu_id"
 	fi
@@ -108,13 +110,17 @@ ensure_menu_item() {
 		php -r '
 			$items = json_decode(stream_get_contents(STDIN), true) ?: [];
 			$pageId = (string) $argv[1];
+			$title = (string) $argv[2];
 			foreach ($items as $item) {
-				if (($item["type"] ?? "") === "post_type" && (string) ($item["object_id"] ?? "") === $pageId) {
+				$isPostType = ($item["type"] ?? "") === "post_type";
+				$matchesObject = (string) ($item["object_id"] ?? "") === $pageId;
+				$matchesTitle = (string) ($item["title"] ?? "") === $title;
+				if ($isPostType && ($matchesObject || $matchesTitle)) {
 					echo $item["db_id"];
 					exit;
 				}
 			}
-		' "$page_id")"
+		' "$page_id" "$title")"
 
 	if [[ -n "$existing_item_id" ]]; then
 		wp_cli menu item update "$existing_item_id" \
@@ -136,19 +142,19 @@ IFS= read -r -d '' HOME_CONTENT <<'HTML' || true
 	</section>
 
 	<section class="accessps-home__intro accessps-narrow">
-		<h1 class="accessps-title accessps-home__title" data-home-title>ACCESS PS</h1>
+		<h1 class="accessps-title accessps-home__title">ACCESS PS</h1>
 		<div class="accessps-lead accessps-home__copy">
-			<p data-home-intro>Benvenuti in <strong>ACCESS PS</strong>,<br>il progetto di Terza Missione dell’<a href="/la-storia-delluniversita-di-roma-la-sapienza/"><strong>Università di Roma La Sapienza</strong></a> dedicato al Pronto Soccorso del <a href="/la-storia-del-policlinico-umberto-i/"><strong>Policlinico Umberto I</strong></a>.</p>
-			<p data-home-info>Il sito offre informazioni utili per orientarsi nei servizi e nei percorsi di accesso al Pronto Soccorso.</p>
-			<p data-home-mission>Un’iniziativa pensata per accogliere, informare e accompagnare cittadini e pazienti, valorizzando il legame tra cura, ricerca e formazione.</p>
+			<p>Benvenuti in <strong>ACCESS PS</strong>,<br>il progetto di Terza Missione dell’<a href="/la-storia-delluniversita-di-roma-la-sapienza/"><strong>Università di Roma La Sapienza</strong></a> dedicato al Pronto Soccorso del <a href="/la-storia-del-policlinico-umberto-i/"><strong>Policlinico Umberto I</strong></a>.</p>
+			<p>Il sito offre informazioni utili per orientarsi nei servizi e nei percorsi di accesso al Pronto Soccorso.</p>
+			<p>Un’iniziativa pensata per accogliere, informare e accompagnare cittadini e pazienti, valorizzando il legame tra cura, ricerca e formazione.</p>
 		</div>
 
 		[accessps_language_selector]
 
-		<p><a class="accessps-enter-button js-enter-button" href="/dove-ti-trovi/">ENTRA</a></p>
+		<p><a class="accessps-enter-button" href="/dove-ti-trovi/">ENTRA</a></p>
 
-		<div class="accessps-stamp" aria-hidden="true">
-			<div class="accessps-stamp__circle">Università di Roma La Sapienza<br>Access PS</div>
+		<div class="accessps-stamp">
+			<img src="/wp-content/themes/accesspstheme/assets/images/access-ps-logo.svg" alt="Access PS">
 		</div>
 	</section>
 </div>

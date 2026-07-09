@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-labelledby="sapienza-title">
+	<title id="sapienza-title">Sapienza Università di Roma</title>
+	<rect width="520" height="150" fill="none"/>
+	<g fill="#87091e">
+		<circle cx="62" cy="75" r="44" fill="none" stroke="#87091e" stroke-width="8"/>
+		<text x="62" y="91" text-anchor="middle" font-family="Georgia, serif" font-size="54" font-weight="700">S</text>
+		<text x="140" y="50" font-family="Arial, sans-serif" font-size="15" font-weight="700">Progetto di Terza missione di</text>
+		<text x="138" y="102" font-family="Georgia, serif" font-size="62" letter-spacing="1">Sapienza</text>
+		<text x="140" y="127" font-family="Arial, sans-serif" font-size="22" letter-spacing="1.4">UNIVERSITÀ DI ROMA</text>
+	</g>
+</svg>

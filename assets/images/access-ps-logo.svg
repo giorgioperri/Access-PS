@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="accessps-title">
+	<title id="accessps-title">Access PS</title>
+	<rect width="420" height="420" fill="#fff"/>
+	<circle cx="210" cy="210" r="155" fill="none" stroke="#202020" stroke-width="8"/>
+	<circle cx="210" cy="210" r="122" fill="none" stroke="#202020" stroke-width="3"/>
+	<g fill="none" stroke="#202020" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M118 227c22-46 55-69 92-69s70 23 92 69"/>
+		<path d="M138 232c48 33 96 33 144 0"/>
+		<path d="M164 162c8 35 24 56 46 64 22-8 38-29 46-64"/>
+		<path d="M186 144v76M210 134v96M234 144v76"/>
+	</g>
+	<text x="210" y="75" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" letter-spacing="1.5">UNIVERSITÀ DI ROMA LA SAPIENZA</text>
+	<text x="210" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="800">ACCESS PS</text>
+	<text x="210" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700">PRONTO SOCCORSO - UMBERTO PRIMO - ROMA</text>
+</svg>

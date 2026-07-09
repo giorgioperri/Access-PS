@@ -2,7 +2,7 @@
 
 Custom WordPress theme for Access PS, an Italian information site that helps people understand the Pronto Soccorso access path.
 
-The theme is built as a classic WordPress theme with normal page content so WPML can translate pages, menus, and strings. The language selector has a local five-language fallback and uses WPML language URLs automatically when WPML is active.
+The theme is built as a classic WordPress theme with normal page content so WPML can translate pages, menus, and strings. The homepage language selector uses a custom searchable UI backed by WPML's active language URLs.
 
 ## Site Structure
 
