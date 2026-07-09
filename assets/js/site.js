@@ -68,10 +68,41 @@
 		var current = selector.querySelector('[data-language-current]');
 		var search = selector.querySelector('[data-language-search]');
 		var choose = selector.querySelector('[data-language-choose]');
+		var options = selector.querySelectorAll('[data-language-option]');
+		var noResults = selector.querySelector('[data-language-no-results]');
 		var selectedUrl = '';
 
 		if (!trigger || !panel || !choose) {
 			return;
+		}
+
+		function normalize(value) {
+			return (value || '')
+				.toString()
+				.normalize('NFD')
+				.replace(/[\u0300-\u036f]/g, '')
+				.toLowerCase()
+				.trim();
+		}
+
+		function filterLanguages() {
+			var query = normalize(search ? search.value : '');
+			var visibleCount = 0;
+
+			options.forEach(function (option) {
+				var searchableText = normalize(option.dataset.label + ' ' + option.textContent);
+				var isMatch = !query || searchableText.indexOf(query) !== -1;
+
+				option.hidden = !isMatch;
+
+				if (isMatch) {
+					visibleCount += 1;
+				}
+			});
+
+			if (noResults) {
+				noResults.hidden = visibleCount > 0;
+			}
 		}
 
 		trigger.addEventListener('click', function () {
@@ -81,15 +112,16 @@
 			panel.hidden = isOpen;
 
 			if (!isOpen && search) {
+				filterLanguages();
 				search.focus();
 			}
 		});
 
-		selector.querySelectorAll('[data-language-option]').forEach(function (option) {
+		options.forEach(function (option) {
 			option.addEventListener('click', function () {
 				selectedUrl = option.dataset.url || '';
 
-				selector.querySelectorAll('[data-language-option]').forEach(function (item) {
+				options.forEach(function (item) {
 					item.classList.toggle('is-selected', item === option);
 				});
 
@@ -102,13 +134,9 @@
 		});
 
 		if (search) {
-			search.addEventListener('input', function () {
-				var query = search.value.trim().toLowerCase();
-
-				selector.querySelectorAll('[data-language-option]').forEach(function (option) {
-					option.hidden = option.dataset.label.toLowerCase().indexOf(query) === -1;
-				});
-			});
+			search.addEventListener('input', filterLanguages);
+			search.addEventListener('search', filterLanguages);
+			filterLanguages();
 		}
 
 		choose.addEventListener('click', function () {

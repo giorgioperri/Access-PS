@@ -8,6 +8,7 @@ set -euo pipefail
 #   ./build-site-structure.sh
 #   WP_PATH=/path/to/wordpress ./build-site-structure.sh
 #   WP=wp-cli.phar ./build-site-structure.sh
+#   WP_SKIP_PLUGINS=1 ./build-site-structure.sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WP_ROOT_DEFAULT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
@@ -15,9 +16,14 @@ THEME_SLUG="$(basename "$SCRIPT_DIR")"
 
 WP="${WP:-wp}"
 WP_PATH="${WP_PATH:-$WP_ROOT_DEFAULT}"
+WP_SKIP_PLUGINS="${WP_SKIP_PLUGINS:-0}"
 
 wp_cli() {
-	"$WP" --path="$WP_PATH" --skip-plugins "$@"
+	if [[ "$WP_SKIP_PLUGINS" == "1" ]]; then
+		"$WP" --path="$WP_PATH" --skip-plugins "$@"
+	else
+		"$WP" --path="$WP_PATH" "$@"
+	fi
 }
 
 require_wp() {
@@ -32,15 +38,45 @@ require_wp() {
 	fi
 }
 
-page_id_by_slug() {
+page_id_by_slug_or_title() {
 	local slug="$1"
+	local title="$2"
+	local front_id
+
+	front_id="$(wp_cli option get page_on_front 2>/dev/null || true)"
 
 	wp_cli post list \
 		--post_type=page \
 		--post_status=any \
-		--pagename="$slug" \
-		--field=ID \
-		--format=ids
+		--fields=ID,post_title,post_name \
+		--format=json |
+		php -r '
+			$posts = json_decode(stream_get_contents(STDIN), true) ?: [];
+			$slug = (string) $argv[1];
+			$title = (string) $argv[2];
+			$frontId = (string) $argv[3];
+
+			foreach ($posts as $post) {
+				if ((string) ($post["post_name"] ?? "") === $slug) {
+					echo $post["ID"];
+					exit;
+				}
+			}
+
+			foreach ($posts as $post) {
+				if ((string) ($post["ID"] ?? "") === $frontId && (string) ($post["post_title"] ?? "") === $title) {
+					echo $post["ID"];
+					exit;
+				}
+			}
+
+			foreach ($posts as $post) {
+				if ((string) ($post["post_title"] ?? "") === $title) {
+					echo $post["ID"];
+					exit;
+				}
+			}
+		' "$slug" "$title" "$front_id"
 }
 
 upsert_page() {
@@ -50,7 +86,7 @@ upsert_page() {
 	local menu_order="${4:-0}"
 	local page_id
 
-	page_id="$(page_id_by_slug "$slug")"
+	page_id="$(page_id_by_slug_or_title "$slug" "$title")"
 
 	if [[ -n "$page_id" ]]; then
 		wp_cli post update "$page_id" \
@@ -70,7 +106,7 @@ upsert_page() {
 			--post_status=publish \
 			--menu_order="$menu_order" \
 			>/dev/null
-		page_id_by_slug "$slug"
+		page_id_by_slug_or_title "$slug" "$title"
 	fi
 }
 

@@ -178,6 +178,7 @@ function accesspstheme_language_selector_shortcode() {
 						</button>
 					<?php endforeach; ?>
 				</div>
+				<p class="accessps-language__empty" hidden data-language-no-results><?php esc_html_e( 'Nessuna lingua trovata.', 'accesspstheme' ); ?></p>
 				<button class="accessps-language__choose" type="button" disabled data-language-choose><?php esc_html_e( 'Scegli', 'accesspstheme' ); ?></button>
 			</div>
 		</div>

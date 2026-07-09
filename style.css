@@ -51,6 +51,10 @@ body.menu-is-open {
 	overflow: hidden;
 }
 
+[hidden] {
+	display: none !important;
+}
+
 a {
 	color: var(--accessps-red);
 	text-decoration-thickness: 0.08em;
@@ -423,6 +427,17 @@ strong {
 
 .accessps-language__option.is-selected .accessps-language__radio {
 	border: 0.42rem solid var(--accessps-red);
+}
+
+.accessps-language__empty {
+	margin: 0.8rem 0 0;
+	padding: 0.75rem 1rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.72);
+	color: var(--accessps-muted);
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-align: center;
 }
 
 .accessps-language__choose {
@@ -927,7 +942,7 @@ strong {
 	}
 
 	.accessps-hero-image {
-		min-height: clamp(18rem, 32vw, 25rem);
+		min-height: clamp(9rem, 16vw, 13rem);
 	}
 
 	.accessps-home__intro {
