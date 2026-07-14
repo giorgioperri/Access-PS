@@ -91,7 +91,7 @@ function accesspstheme_brand_logo( $class_name = '' ) {
 	$class_name = trim( 'accessps-brand ' . $class_name );
 
 	return '<a class="' . esc_attr( $class_name ) . '" href="' . esc_url( home_url( '/' ) ) . '" rel="home">
-		<img src="' . esc_url( accesspstheme_image_url( 'sapienza-logo.svg' ) ) . '" alt="' . esc_attr__( 'Sapienza Università di Roma', 'accesspstheme' ) . '">
+		<img src="' . esc_url( accesspstheme_image_url( 'accessps/home/logo-sapienza-terza-missione.png' ) ) . '" alt="' . esc_attr__( 'Sapienza Università di Roma', 'accesspstheme' ) . '">
 	</a>';
 }
 

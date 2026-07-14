@@ -174,7 +174,7 @@ ensure_menu_item() {
 IFS= read -r -d '' HOME_CONTENT <<'HTML' || true
 <div class="accessps-page accessps-home">
 	<section class="accessps-hero-image">
-		<img src="https://picsum.photos/1100/620?random=11" alt="">
+		<img src="/wp-content/themes/accesspstheme/assets/images/accessps/home/header-homepage.png" alt="">
 	</section>
 
 	<section class="accessps-home__intro accessps-narrow">
@@ -190,7 +190,7 @@ IFS= read -r -d '' HOME_CONTENT <<'HTML' || true
 		<p><a class="accessps-enter-button" href="/dove-ti-trovi/">ENTRA</a></p>
 
 		<div class="accessps-stamp">
-			<img src="/wp-content/themes/accesspstheme/assets/images/access-ps-logo.svg" alt="Access PS">
+			<img src="/wp-content/themes/accesspstheme/assets/images/accessps/home/logo-access-ps.png" alt="Access PS">
 		</div>
 	</section>
 </div>
@@ -204,22 +204,22 @@ IFS= read -r -d '' LANDING_CONTENT <<'HTML' || true
 	</section>
 
 	<section class="accessps-choice__stage">
-		<img src="https://picsum.photos/1100/1100?random=21" alt="">
+		<img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/sfondo-pagina-dove-ti-trovi.png" alt="">
 		<div class="accessps-choice__cards">
 			<a class="accessps-choice-card" href="/arrivo/">
-				<span class="accessps-choice-card__icon">[accessps_icon name="pin"]</span>
+				<span class="accessps-choice-card__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-arrivo.png" alt=""></span>
 				<div><h2>ARRIVO</h2><p>Sei all’ingresso<br>del Pronto Soccorso</p></div>
-				<span class="accessps-choice-card__arrow">[accessps_icon name="arrow"]</span>
+				<span class="accessps-choice-card__arrow"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-freccia.png" alt=""></span>
 			</a>
 			<a class="accessps-choice-card" href="/visita-medica/">
-				<span class="accessps-choice-card__icon">[accessps_icon name="stethoscope"]</span>
+				<span class="accessps-choice-card__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-visita-medica.png" alt=""></span>
 				<div><h2>VISITA MEDICA</h2><p>Sei in attesa o in<br>area visite</p></div>
-				<span class="accessps-choice-card__arrow">[accessps_icon name="arrow"]</span>
+				<span class="accessps-choice-card__arrow"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-freccia.png" alt=""></span>
 			</a>
 			<a class="accessps-choice-card" href="/uscita/">
-				<span class="accessps-choice-card__icon">[accessps_icon name="exit"]</span>
+				<span class="accessps-choice-card__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-uscita.png" alt=""></span>
 				<div><h2>USCITA</h2><p>Stai per lasciare<br>il pronto soccorso</p></div>
-				<span class="accessps-choice-card__arrow">[accessps_icon name="arrow"]</span>
+				<span class="accessps-choice-card__arrow"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/landing/icona-freccia.png" alt=""></span>
 			</a>
 		</div>
 	</section>
@@ -231,7 +231,7 @@ IFS= read -r -d '' ARRIVO_CONTENT <<'HTML' || true
 	<section class="accessps-section">
 		<h1 class="accessps-title">ARRIVO</h1>
 		<p><strong>Quando arrivi in PRONTO SOCCORSO un infermiere effettuerà il TRIAGE ovvero valuterà il motivo per cui sei arrivato e le tue condizioni.<br>Ti verrà assegnato un codice colore che determinerà la priorità di ingresso in visita.</strong></p>
-		<div class="accessps-photo accessps-photo--fade"><img src="https://picsum.photos/760/360?random=31" alt=""></div>
+		<div class="accessps-photo accessps-photo--fade"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/header-sala-attesa.png" alt=""></div>
 	</section>
 
 	<section class="accessps-section">
@@ -262,7 +262,7 @@ IFS= read -r -d '' ARRIVO_CONTENT <<'HTML' || true
 					<li>Se è migliorato, peggiorato o è rimasto uguale</li>
 				</ul>
 			</div>
-			<span class="accessps-inline-icon">[accessps_icon name="questions"]</span>
+			<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-domande.png" alt=""></span>
 		</div>
 		<div class="accessps-two-col">
 			<div>
@@ -274,15 +274,20 @@ IFS= read -r -d '' ARRIVO_CONTENT <<'HTML' || true
 					<li>Se hai allergie</li>
 				</ul>
 			</div>
-			<span class="accessps-inline-icon">[accessps_icon name="document"]</span>
+			<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-info-sanitarie.png" alt=""></span>
 		</div>
-		<p><strong>Se necessario verranno controllati i parametri vitali:</strong></p>
-		<ul>
-			<li>Pressione arteriosa</li>
-			<li>Frequenza cardiaca.</li>
-			<li>Temperatura.</li>
-			<li>Ossigenazione.</li>
-		</ul>
+		<div class="accessps-two-col">
+			<div>
+				<p><strong>Se necessario verranno controllati i parametri vitali:</strong></p>
+				<ul>
+					<li>Pressione arteriosa</li>
+					<li>Frequenza cardiaca.</li>
+					<li>Temperatura.</li>
+					<li>Ossigenazione.</li>
+				</ul>
+			</div>
+			<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-parametri-vitali.png" alt=""></span>
+		</div>
 		<p><strong>Possono essere richiesti esami iniziali</strong></p>
 		<p>In alcuni casi vengono eseguiti subito esami del sangue per iniziare la valutazione</p>
 		<p><strong>Ti potrebbe essere posizionata una ago cannula per l’esecuzione di prelievi ulteriori o la successiva somministrazione di farmaci.</strong></p>
@@ -290,10 +295,11 @@ IFS= read -r -d '' ARRIVO_CONTENT <<'HTML' || true
 
 	<section class="accessps-section">
 		<h2>Cosa ti verrà dato dall’infermiere:</h2>
-		<span class="accessps-inline-icon">[accessps_icon name="document"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-tre-cifre.png" alt=""></span>
 		<p><strong>Un foglio con un numero<br>di TRE CIFRE.</strong><br>È il numero con cui verrai<br>chiamato per la visita.</p>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-braccialetto.png" alt=""></span>
 		<p><strong>Un braccialetto<br>identificativo.</strong><br>Deve rimanere sempre<br>al polso.</p>
-		<div class="accessps-photo"><img src="https://picsum.photos/760/170?random=32" alt=""></div>
+		<div class="accessps-photo accessps-photo--short"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/immagine-braccialetto.png" alt=""></div>
 		<p class="accessps-caption">Esempio illustrativo di braccialetto identificativo.</p>
 	</section>
 
@@ -313,20 +319,20 @@ IFS= read -r -d '' ARRIVO_CONTENT <<'HTML' || true
 			<span><i class="accessps-dot accessps-dot--white"></i><strong>Bianco</strong> → Variabile</span>
 		</div>
 		<p>Contatta gli operatori se il tuo problema peggiora<br>Non allontanarti e non aspettare in altre aree diverse da quelle indicate dal personale.</p>
-		<div class="accessps-photo accessps-photo--fade"><img src="https://picsum.photos/760/360?random=33" alt=""></div>
+		<div class="accessps-photo accessps-photo--fade"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/immagine-sala-attesa-pazienti.png" alt=""></div>
 		<p class="accessps-caption">Sala d’attesa pazienti</p>
 	</section>
 
 	<section class="accessps-section">
 		<h2>Dove vanno i familiari</h2>
 		<p>I familiari <strong>non possono entrare nelle aree di visita,</strong> non devono entrare nei reparti o cercare direttamente il paziente.<br>Devono recarsi nella sala d’attesa parenti, che vi verrà indicata dal personale.</p>
-		<div class="accessps-photo accessps-photo--fade"><img src="https://picsum.photos/760/360?random=34" alt=""></div>
+		<div class="accessps-photo accessps-photo--fade"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/box-accoglienza-1.png" alt=""></div>
 		<p>I familiari potranno chiedere informazioni al:<br><strong>BOX ACCOGLIENZA PARENTI</strong></p>
-		<div class="accessps-photo accessps-photo--fade"><img src="https://picsum.photos/760/360?random=35" alt=""></div>
+		<div class="accessps-photo accessps-photo--fade"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/box-accoglienza-2.png" alt=""></div>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="clipboard"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-questionario.png" alt=""></span>
 		<h2>Aiutaci a migliorare:</h2>
 		<p>La tua opinione è importante.</p>
 		<p><a class="accessps-button" href="https://forms.google.com/">Compila il questionario</a></p>
@@ -352,7 +358,10 @@ IFS= read -r -d '' VISITA_CONTENT <<'HTML' || true
 				</ul>
 				<p>Il medico può prescriverti dei farmaci somministrati in forma di compresse o per via endovenosa.</p>
 			</div>
-			<span class="accessps-inline-icon">[accessps_icon name="document"]</span>
+			<span class="accessps-inline-icon accessps-inline-icon--pair">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/icona-fiala.png" alt="">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/icona-copione-cuore.png" alt="">
+			</span>
 		</div>
 	</section>
 
@@ -360,18 +369,18 @@ IFS= read -r -d '' VISITA_CONTENT <<'HTML' || true
 		<h2>Cosa succede dopo la visita</h2>
 		<h3>Piastra 1:</h3>
 		<p>Sei in un'area dedicata alla valutazione e al trattamento iniziale. Verrai informato sull'andamento degli esami e sulle tue condizioni.</p>
-		<div class="accessps-photo"><img src="https://picsum.photos/760/220?random=41" alt=""></div>
+		<div class="accessps-photo accessps-photo--sign"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/piastra-1.png" alt=""></div>
 		<h3>Piastra 2:</h3>
 		<p>Sei in attesa di un posto letto in questo ospedale o in un altro ospedale convenzionato, che ti verrà fornito appena disponibile.</p>
-		<div class="accessps-photo"><img src="https://picsum.photos/760/220?random=42" alt=""></div>
+		<div class="accessps-photo accessps-photo--sign"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/piastra-2.png" alt=""></div>
 		<h3>Piastra 3 – Urgenze Minori:</h3>
 		<p>Sei in un'area dedicata alla valutazione e al trattamento.</p>
-		<div class="accessps-photo"><img src="https://picsum.photos/760/220?random=43" alt=""></div>
+		<div class="accessps-photo accessps-photo--sign"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/piastra-3.png" alt=""></div>
 		<p>La scelta della poltrona o della barella è dettata dal personale in base alle singole necessità dei pazienti.</p>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="bed"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/icona-sala-attesa.png" alt=""></span>
 		<h2>Cosa devi fare durante l'attesa</h2>
 		<p>Evita di allontanarti senza avvisare il personale per non rallentare il tuo percorso.</p>
 		<p>Se i tuoi sintomi cambiano o peggiorano, avvisa subito il personale in servizio.</p>
@@ -387,17 +396,17 @@ IFS= read -r -d '' VISITA_CONTENT <<'HTML' || true
 		<p>Le persone che ti hanno accompagnato si trovano in sala d’attesa parenti.</p>
 		<p>Per chiedere informazioni devono rivolgersi al:<br><strong>BOX ACCOGLIENZA PARENTI</strong></p>
 		<p><strong>IMPORTANTE:</strong> gli orari di visita sono esposti all'entrata di ogni area del pronto soccorso e possono essere richiesti al <strong>BOX ACCOGLIENZA PARENTI.</strong></p>
-		<div class="accessps-photo accessps-photo--fade"><img src="https://picsum.photos/760/360?random=44" alt=""></div>
+		<div class="accessps-photo accessps-photo--fade"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/box-accoglienza.png" alt=""></div>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="wifi"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/visita-medica/icona-wifi.png" alt=""></span>
 		<h2>Connessione Wi-Fi</h2>
 		<p>All'interno del pronto soccorso è presente una rete Wi-Fi a cui puoi collegarti durante l'attesa.</p>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="clipboard"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-questionario.png" alt=""></span>
 		<h2>Aiutaci a migliorare:</h2>
 		<p>La tua opinione è importante.</p>
 		<p><a class="accessps-button" href="https://forms.google.com/">Compila il questionario</a></p>
@@ -423,7 +432,10 @@ IFS= read -r -d '' USCITA_CONTENT <<'HTML' || true
 				<li>eventuali controlli da eseguire</li>
 				<li>le indicazioni del medico</li>
 			</ul>
-			<span class="accessps-inline-icon">[accessps_icon name="document"]</span>
+			<span class="accessps-inline-icon accessps-inline-icon--pair">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-pillole.png" alt="">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-foglio-e-penna.png" alt="">
+			</span>
 		</div>
 		<p>Potrebbero essere presenti delle impegnative per farmaci o visite. Se presenti, recati in farmacia per i farmaci e in ambulatorio per la visita prescritta.</p>
 		<p>Conserva sempre la documentazione rilasciata.</p>
@@ -442,7 +454,10 @@ IFS= read -r -d '' USCITA_CONTENT <<'HTML' || true
 					<li>l'impegnativa per la visita consegnata al pronto soccorso</li>
 				</ul>
 			</div>
-			<span class="accessps-inline-icon">[accessps_icon name="document"]</span>
+			<span class="accessps-inline-icon accessps-inline-icon--pair">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-cartella.png" alt="">
+				<img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-foglio-e-matita.png" alt="">
+			</span>
 		</div>
 		<p>Per alcune prestazioni potrebbe essere richiesto il pagamento del ticket, alla cassa indicata dal personale.</p>
 	</section>
@@ -452,11 +467,11 @@ IFS= read -r -d '' USCITA_CONTENT <<'HTML' || true
 		<p>In alcuni casi il tuo percorso continua all'interno del pronto soccorso.</p>
 		<p><strong>OBI – Osservazione Breve Intensiva</strong></p>
 		<p>Rimani in un'area dedicata dove potrai eseguire ulteriori indagini e/o terapie, per poi essere dimesso o, se necessario, ricoverato.</p>
-		<div class="accessps-photo"><img src="https://picsum.photos/760/240?random=51" alt=""></div>
+		<div class="accessps-photo accessps-photo--sign"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-osservazione-breve-intensiva.png" alt=""></div>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="bed"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-letto.png" alt=""></span>
 		<h2>RICOVERO IN REPARTO OSPEDALIERO</h2>
 		<p><strong>Se vieni ricoverato:</strong></p>
 		<ul>
@@ -472,13 +487,13 @@ IFS= read -r -d '' USCITA_CONTENT <<'HTML' || true
 		<h2>PAGAMENTO TICKET PRONTO SOCCORSO</h2>
 		<p>Il ticket è previsto per accessi non urgenti non seguiti da ricovero. Se non esente, l'utente paga la quota fissa e gli eventuali ticket per esami/prestazioni eseguiti.</p>
 		<p>Rif. normativo: art. 1, comma 796, lett. p), L. 296/2006; DCA Regione Lazio n. 42/2008.</p>
-		<span class="accessps-inline-icon">[accessps_icon name="ticket"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/uscita/icona-ticket.png" alt=""></span>
 		<h2>PAGAMENTO TICKET FARMACI E VISITE</h2>
 		<p>Se non hai un codice fiscale, la tessera TEAM o il tesserino STP, i farmaci e/o le visite specialistiche verranno prescritti su carta intestata e dovrai pagare la tariffa per intero, anche se avresti diritto all'esenzione.</p>
 	</section>
 
 	<section class="accessps-section">
-		<span class="accessps-inline-icon">[accessps_icon name="clipboard"]</span>
+		<span class="accessps-inline-icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/arrivo/icona-questionario.png" alt=""></span>
 		<h2>Aiutaci a migliorare:</h2>
 		<p>La tua opinione è importante.</p>
 		<p><a class="accessps-button" href="https://forms.google.com/">Compila il questionario</a></p>
@@ -488,25 +503,25 @@ HTML
 
 IFS= read -r -d '' POLICLINICO_CONTENT <<'HTML' || true
 <div class="accessps-page">
-	<section class="accessps-history-hero" style="background-image: url('https://picsum.photos/1000/620?random=61');">
+	<section class="accessps-history-hero" style="background-image: url('/wp-content/themes/accesspstheme/assets/images/accessps/storia-policlinico/header-policlinico.png');">
 		<h1>La storia del Policlinico Umberto I</h1>
 	</section>
 
 	<section class="accessps-history accessps-narrow">
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="building"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-policlinico/icona-tempio-con-croce.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p><strong>Il Policlinico Umberto I</strong> è stato fondato a Roma nella seconda metà dell'Ottocento, in risposta all'esigenza di dotare la capitale del nuovo Regno d'Italia di un ospedale universitario capace di unire formazione medica, ricerca scientifica e cura dei pazienti in un'unica struttura organica. Il principale promotore del progetto fu <strong>Guido Baccelli</strong>, clinico della Sapienza e Ministro della Pubblica Istruzione, che dedicò decenni alla sua realizzazione, istituendo una commissione di illustri clinici e ottenendo i primi finanziamenti statali nel <strong>1881.</strong></p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="door"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-policlinico/icona-ingresso-nastro.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p>La prima pietra fu posata il <strong>19 gennaio 1888</strong> dal Re Umberto I e dalla Regina Margherita di Savoia, da cui l’ospedale prese il nome che porta ancora oggi. I lavori veri e propri, su progetto degli architetti Giulio Podesti e Filippo Laccetti, si protrassero per oltre un decennio. La solenne cerimonia di inaugurazione si tenne in <strong>Campidoglio il 18 gennaio 1903</strong>, alla presenza del Re Vittorio Emanuele III; l’inaugurazione ufficiale dell’intero complesso, in occasione del giubileo accademico di Baccelli, avvenne nell’<strong>aprile 1906.</strong></p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="hands"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-policlinico/icona-mani-e-cuore.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p>Fin dalla sua nascita il Policlinico si distinse come <strong>prototipo insuperato di ospedale a padiglioni</strong>, protagonista della svolta dell’architettura sanitaria che attraverso tutta l’Europa nella seconda metà dell’Ottocento. La struttura, con i suoi edifici distribuiti attorno a un nucleo centrale, conserva ancora oggi quella leggibilità storica e quella coerenza progettuale che ne hanno fatto un modello di riferimento.</p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="hospital"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-policlinico/icona-ospedale.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p>Nel corso dei decenni il Policlinico si è consolidato come <strong>struttura di riferimento</strong> per l’intero <strong>Centro Italia</strong>, strettamente integrato con la <strong>Facoltà di Medicina e Chirurgia della Sapienza</strong>. Oggi dispone di 1.235 posti letto organizzati in <strong>11 Dipartimenti Assistenziali Integrati</strong>, con specialità che coprono la quasi totalità delle discipline mediche e chirurgiche. Sul fronte dell’emergenza sono attivi <strong>5 Pronto Soccorso</strong>, di cui 3 interni e 2 esterni, tutti operativi 24 ore su 24, a testimonianza di una vocazione all’assistenza continua che attraversa tutta la storia dell’istituzione.</p></div>
 		</div>
 
@@ -525,25 +540,25 @@ HTML
 
 IFS= read -r -d '' SAPIENZA_CONTENT <<'HTML' || true
 <div class="accessps-page">
-	<section class="accessps-history-hero" style="background-image: url('https://picsum.photos/1000/620?random=62');">
+	<section class="accessps-history-hero" style="background-image: url('/wp-content/themes/accesspstheme/assets/images/accessps/storia-sapienza/header-sapienza.png');">
 		<h1>La storia dell’università di Roma La Sapienza</h1>
 	</section>
 
 	<section class="accessps-history accessps-narrow">
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="building"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-sapienza/icona-tempio.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p><strong>La Sapienza Università di Roma</strong> è una delle università più antiche d’Europa. Fondata nel 1303 da Papa Bonifacio VIII, nasce come luogo di studio, ricerca e formazione al servizio della città e della comunità.</p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="hospital"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-sapienza/icona-universita.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p>Nel corso dei secoli la Sapienza è cresciuta insieme a Roma, diventando un punto di riferimento nazionale e internazionale per la conoscenza scientifica, umanistica e medica.</p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="hands"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-sapienza/icona-persone-network.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p>Il legame tra università, cura e territorio è al centro della sua missione. Attraverso la didattica, la ricerca e la Terza Missione, la Sapienza promuove progetti capaci di creare valore pubblico e di rendere la conoscenza accessibile.</p></div>
 		</div>
 		<div class="accessps-history-block">
-			<div class="accessps-history-block__icon">[accessps_icon name="document"]</div>
+			<div class="accessps-history-block__icon"><img src="/wp-content/themes/accesspstheme/assets/images/accessps/storia-sapienza/icona-persone-mondo.png" alt=""></div>
 			<div class="accessps-history-block__copy"><p><strong>ACCESS PS</strong> nasce in questo contesto: un progetto pensato per accompagnare cittadini e pazienti nell’accesso al Pronto Soccorso, valorizzando il rapporto tra formazione, ricerca e assistenza.</p></div>
 		</div>
 
