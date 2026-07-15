@@ -976,7 +976,8 @@ strong {
 	}
 
 	.accessps-hero-image {
-		min-height: clamp(9rem, 16vw, 13rem);
+		height: clamp(13rem, 24vw, 18rem);
+		min-height: 0;
 	}
 
 	.accessps-home__intro {

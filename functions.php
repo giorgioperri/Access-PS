@@ -201,7 +201,7 @@ function accesspstheme_get_wpml_languages() {
 		'wpml_active_languages',
 		null,
 		array(
-			'skip_missing' => 0,
+			'skip_missing' => 1,
 			'orderby'      => 'native_name',
 		)
 	);
@@ -225,9 +225,11 @@ function accesspstheme_get_wpml_languages() {
 			$label = sprintf( '%1$s (%2$s)', $native_name, $translated_name );
 		}
 
+		$url = set_url_scheme( $language['url'], wp_parse_url( home_url( '/' ), PHP_URL_SCHEME ) ?: 'https' );
+
 		$languages[] = array(
 			'label'    => $label,
-			'url'      => $language['url'],
+			'url'      => $url,
 			'flag_url' => ! empty( $language['country_flag_url'] ) ? $language['country_flag_url'] : '',
 		);
 	}

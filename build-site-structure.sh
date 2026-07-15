@@ -41,9 +41,6 @@ require_wp() {
 page_id_by_slug_or_title() {
 	local slug="$1"
 	local title="$2"
-	local front_id
-
-	front_id="$(wp_cli option get page_on_front 2>/dev/null || true)"
 
 	wp_cli post list \
 		--post_type=page \
@@ -54,21 +51,10 @@ page_id_by_slug_or_title() {
 			$posts = json_decode(stream_get_contents(STDIN), true) ?: [];
 			$slug = (string) $argv[1];
 			$title = (string) $argv[2];
-			$frontId = (string) $argv[3];
 
-			foreach ($posts as $post) {
-				if ((string) ($post["post_name"] ?? "") === $slug) {
-					echo $post["ID"];
-					exit;
-				}
-			}
-
-			foreach ($posts as $post) {
-				if ((string) ($post["ID"] ?? "") === $frontId && (string) ($post["post_title"] ?? "") === $title) {
-					echo $post["ID"];
-					exit;
-				}
-			}
+			usort($posts, static function ($a, $b) {
+				return (int) ($a["ID"] ?? 0) <=> (int) ($b["ID"] ?? 0);
+			});
 
 			foreach ($posts as $post) {
 				if ((string) ($post["post_title"] ?? "") === $title) {
@@ -76,7 +62,14 @@ page_id_by_slug_or_title() {
 					exit;
 				}
 			}
-		' "$slug" "$title" "$front_id"
+
+			foreach ($posts as $post) {
+				if ((string) ($post["post_name"] ?? "") === $slug) {
+					echo $post["ID"];
+					exit;
+				}
+			}
+		' "$slug" "$title"
 }
 
 upsert_page() {
