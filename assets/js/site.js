@@ -65,14 +65,11 @@
 	document.querySelectorAll('[data-language-selector]').forEach(function (selector) {
 		var trigger = selector.querySelector('.accessps-language__trigger');
 		var panel = selector.querySelector('.accessps-language__panel');
-		var current = selector.querySelector('[data-language-current]');
 		var search = selector.querySelector('[data-language-search]');
-		var choose = selector.querySelector('[data-language-choose]');
 		var options = selector.querySelectorAll('[data-language-option]');
 		var noResults = selector.querySelector('[data-language-no-results]');
-		var selectedUrl = '';
 
-		if (!trigger || !panel || !choose) {
+		if (!trigger || !panel) {
 			return;
 		}
 
@@ -119,17 +116,11 @@
 
 		options.forEach(function (option) {
 			option.addEventListener('click', function () {
-				selectedUrl = option.dataset.url || '';
+				var languageUrl = option.dataset.url || '';
 
-				options.forEach(function (item) {
-					item.classList.toggle('is-selected', item === option);
-				});
-
-				if (current) {
-					current.textContent = option.dataset.label || option.textContent.trim();
+				if (languageUrl) {
+					window.location.href = languageUrl;
 				}
-
-				choose.disabled = !selectedUrl;
 			});
 		});
 
@@ -139,10 +130,5 @@
 			filterLanguages();
 		}
 
-		choose.addEventListener('click', function () {
-			if (selectedUrl) {
-				window.location.href = selectedUrl;
-			}
-		});
 	});
 }());

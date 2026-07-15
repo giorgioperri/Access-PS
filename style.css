@@ -278,6 +278,10 @@ strong {
 	object-fit: cover;
 }
 
+.accessps-hero-image img {
+	object-position: center 43%;
+}
+
 .accessps-hero-image::after,
 .accessps-photo--fade::after {
 	position: absolute;
@@ -438,25 +442,6 @@ strong {
 	font-size: 0.95rem;
 	font-weight: 700;
 	text-align: center;
-}
-
-.accessps-language__choose {
-	width: min(100%, 10.5rem);
-	min-height: 3rem;
-	display: block;
-	margin: 1rem auto 0;
-	border: 2px solid var(--accessps-red);
-	border-radius: 0.35rem;
-	background: #ffffff;
-	color: var(--accessps-text);
-	font: inherit;
-	font-weight: 800;
-	cursor: pointer;
-}
-
-.accessps-language__choose:disabled {
-	opacity: 0.45;
-	cursor: not-allowed;
 }
 
 .accessps-language__notice {
@@ -687,6 +672,7 @@ strong {
 
 .accessps-photo img {
 	aspect-ratio: 16 / 8.5;
+	object-position: center center;
 }
 
 .accessps-photo--short img,

@@ -146,6 +146,53 @@ function accesspstheme_icon_shortcode( $atts ) {
 add_shortcode( 'accessps_icon', 'accesspstheme_icon_shortcode' );
 
 /**
+ * Returns a WPML String Translation-ready UI string.
+ *
+ * @param string $name  Stable string name in WPML.
+ * @param string $value Default string value.
+ * @return string
+ */
+function accesspstheme_ui_string( $name, $value ) {
+	do_action( 'wpml_register_single_string', 'AccessPS Theme', $name, $value );
+
+	$translated = apply_filters( 'wpml_translate_single_string', $value, 'AccessPS Theme', $name );
+
+	if ( $translated !== $value ) {
+		return $translated;
+	}
+
+	$language = apply_filters( 'wpml_current_language', null );
+	$fallbacks = array(
+		'Language selector placeholder' => array(
+			'en' => 'Select your language',
+			'fr' => 'Sélectionnez votre langue',
+			'es' => 'Selecciona tu idioma',
+			'bn' => 'আপনার ভাষা নির্বাচন করুন',
+		),
+		'Language search label'          => array(
+			'en' => 'Search language',
+			'fr' => 'Rechercher une langue',
+			'es' => 'Buscar idioma',
+			'bn' => 'ভাষা খুঁজুন',
+		),
+		'Language search placeholder'    => array(
+			'en' => 'Search language',
+			'fr' => 'Rechercher une langue',
+			'es' => 'Buscar idioma',
+			'bn' => 'ভাষা খুঁজুন',
+		),
+		'Language search no results'     => array(
+			'en' => 'No language found.',
+			'fr' => 'Aucune langue trouvée.',
+			'es' => 'No se encontró ningún idioma.',
+			'bn' => 'কোনো ভাষা পাওয়া যায়নি।',
+		),
+	);
+
+	return $fallbacks[ $name ][ $language ] ?? $value;
+}
+
+/**
  * WPML language selector shortcode.
  *
  * @return string
@@ -159,12 +206,12 @@ function accesspstheme_language_selector_shortcode() {
 		?>
 		<div class="accessps-language" data-language-selector>
 			<button class="accessps-language__trigger" type="button" aria-expanded="false" aria-controls="accessps-language-panel">
-				<span data-language-current><?php esc_html_e( 'Seleziona la tua lingua', 'accesspstheme' ); ?></span>
+				<span data-language-current><?php echo esc_html( accesspstheme_ui_string( 'Language selector placeholder', 'Seleziona la tua lingua' ) ); ?></span>
 				<span class="accessps-language__globe" aria-hidden="true">◎</span>
 			</button>
 			<div class="accessps-language__panel" id="accessps-language-panel" hidden>
-				<label class="screen-reader-text" for="accessps-language-search"><?php esc_html_e( 'Cerca lingua', 'accesspstheme' ); ?></label>
-				<input class="accessps-language__search" id="accessps-language-search" type="search" placeholder="<?php esc_attr_e( 'Cerca lingua', 'accesspstheme' ); ?>" data-language-search>
+				<label class="screen-reader-text" for="accessps-language-search"><?php echo esc_html( accesspstheme_ui_string( 'Language search label', 'Cerca lingua' ) ); ?></label>
+				<input class="accessps-language__search" id="accessps-language-search" type="search" placeholder="<?php echo esc_attr( accesspstheme_ui_string( 'Language search placeholder', 'Cerca lingua' ) ); ?>" data-language-search>
 				<div class="accessps-language__list">
 					<?php foreach ( $languages as $language ) : ?>
 						<button class="accessps-language__option" type="button" data-language-option data-url="<?php echo esc_url( $language['url'] ); ?>" data-label="<?php echo esc_attr( $language['label'] ); ?>">
@@ -178,8 +225,7 @@ function accesspstheme_language_selector_shortcode() {
 						</button>
 					<?php endforeach; ?>
 				</div>
-				<p class="accessps-language__empty" hidden data-language-no-results><?php esc_html_e( 'Nessuna lingua trovata.', 'accesspstheme' ); ?></p>
-				<button class="accessps-language__choose" type="button" disabled data-language-choose><?php esc_html_e( 'Scegli', 'accesspstheme' ); ?></button>
+				<p class="accessps-language__empty" hidden data-language-no-results><?php echo esc_html( accesspstheme_ui_string( 'Language search no results', 'Nessuna lingua trovata.' ) ); ?></p>
 			</div>
 		</div>
 		<?php
@@ -220,10 +266,6 @@ function accesspstheme_get_wpml_languages() {
 		$native_name     = ! empty( $language['native_name'] ) ? $language['native_name'] : '';
 		$translated_name = ! empty( $language['translated_name'] ) ? $language['translated_name'] : '';
 		$label           = $native_name ? $native_name : $translated_name;
-
-		if ( $native_name && $translated_name && $native_name !== $translated_name ) {
-			$label = sprintf( '%1$s (%2$s)', $native_name, $translated_name );
-		}
 
 		$url = set_url_scheme( $language['url'], wp_parse_url( home_url( '/' ), PHP_URL_SCHEME ) ?: 'https' );
 
